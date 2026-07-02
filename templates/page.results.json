@@ -1,0 +1,65 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "crumb_current": "Results",
+        "crumb_current_url": "/pages/results",
+        "heading_pre": "Numbers,<br>not",
+        "heading_thin": "adjectives.",
+        "subtext": "We don't ask you to trust a feeling. Verticals added, athletes returned to play, careers kept on the court. This is the proof behind the guarantee — and it's why we can make one."
+      }
+    },
+    "bynumbers": {
+      "type": "results-grid",
+      "settings": {
+        "padded": true,
+        "number": "01",
+        "title": "By the numbers",
+        "label": "Across the roster",
+        "layout": "bigstat",
+        "footnote": "* Placeholder figures — to be replaced with your verified testing data and consented athlete records."
+      },
+      "blocks": {
+        "b1": { "type": "result", "settings": { "value": "+11", "unit": "cm", "label": "Average vertical gain across Explosive Athlete completers" } },
+        "b2": { "type": "result", "settings": { "value": "94", "unit": "%", "label": "Return-to-play rate through the remodeling program" } },
+        "b3": { "type": "result", "settings": { "value": "300", "unit": "+", "label": "Athletes engineered — juniors to professionals" } },
+        "b4": { "type": "result", "settings": { "value": "-0.09", "unit": "s", "label": "Typical 10m sprint improvement over a training block" } },
+        "b5": { "type": "result", "settings": { "value": "6", "unit": "yr", "label": "Refining the Athlete Engineering Method" } },
+        "b6": { "type": "result", "settings": { "value": "80", "unit": "%", "label": "The adherence line that turns the result into a guarantee" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"]
+    },
+    "athletes": {
+      "type": "athlete-results",
+      "settings": {
+        "footnote": "* Add real athletes, photos, tests and highlights here — this grid is built to scale to as many as you can supply."
+      }
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "label": "This is why we guarantee",
+        "text": "Results at this consistency aren't luck — they're a controlled process. That's what lets us stand behind the outcome instead of just hyping it.",
+        "show_buttons": true,
+        "cta1_label": "Start Explosive Athlete",
+        "cta1_url": "/products/explosive-athlete",
+        "cta2_label": "Apply for coaching",
+        "cta2_url": "/pages/apply"
+      }
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "label": "Add your name to the list",
+        "heading": "Become a number.",
+        "subtext": "The best proof we can show next is you.",
+        "cta1_label": "Start Explosive Athlete",
+        "cta1_url": "/products/explosive-athlete",
+        "cta2_label": "Apply for 1:1 coaching",
+        "cta2_url": "/pages/apply"
+      }
+    }
+  },
+  "order": ["hero", "bynumbers", "athletes", "guarantee", "end-cta"]
+}

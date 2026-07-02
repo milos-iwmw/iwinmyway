@@ -1,0 +1,84 @@
+<section id="programs" class="svc">
+  <div class="wrap">
+    {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'program' -%}
+    <div class="svc-item{% if block.settings.reverse %} rev{% endif %}" {{ block.shopify_attributes }}>
+      <div class="svc-media">
+        {% render 'media-placeholder', image: block.settings.image, variant: block.settings.media_variant, caption: block.settings.caption, tick: block.settings.tick %}
+      </div>
+      <div class="svc-body">
+        <span class="tier">{{ block.settings.tier }}</span>
+        <h3>{{ block.settings.title_line1 }}<br>{{ block.settings.title_line2 }}</h3>
+        <p class="desc">{{ block.settings.description }}</p>
+        {%- if block.settings.levels != blank -%}
+        {%- assign level_list = block.settings.levels | split: ',' -%}
+        <div class="levels">
+          {%- for level in level_list -%}
+            <span>{{ level | strip }}</span>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+        <div class="svc-meta">
+          <div class="m"><div class="mv">{{ block.settings.meta1_value }}</div><div class="mk">{{ block.settings.meta1_label }}</div></div>
+          <div class="m"><div class="mv">{{ block.settings.meta2_value }}</div><div class="mk">{{ block.settings.meta2_label }}</div></div>
+          <div class="m"><div class="mv">{{ block.settings.meta3_value }}</div><div class="mk">{{ block.settings.meta3_label }}</div></div>
+        </div>
+        <div>{% render 'button', label: block.settings.cta_label, url: block.settings.cta_url, style: block.settings.cta_style, size: 'lg' %}</div>
+      </div>
+    </div>
+    {%- endif -%}
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Programs showcase",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "02" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Programs" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Three doors. One system." }
+  ],
+  "blocks": [
+    {
+      "type": "program",
+      "name": "Program",
+      "settings": [
+        { "type": "checkbox", "id": "reverse", "label": "Reverse layout (image on right)" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "media_variant", "label": "Placeholder gradient", "default": "a", "options": [
+          { "value": "a", "label": "A" }, { "value": "b", "label": "B" }, { "value": "c", "label": "C" }, { "value": "d", "label": "D" }
+        ]},
+        { "type": "text", "id": "caption", "label": "Media caption", "default": "FIG.01 — VERTICAL / FORCE-PLATE TEST" },
+        { "type": "text", "id": "tick", "label": "Media tick tag", "default": "EA//ENTRY" },
+        { "type": "text", "id": "tier", "label": "Tier label", "default": "Tier 01 — Entry / Self-serve" },
+        { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "Explosive" },
+        { "type": "text", "id": "title_line2", "label": "Title line 2", "default": "Athlete" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "text", "id": "levels", "label": "Level tags (comma separated, optional)", "default": "EA · JR, EA · U17, EA · U19, EA · PRO, EA · ELITE" },
+        { "type": "text", "id": "meta1_value", "label": "Meta 1 value", "default": "€50–75" },
+        { "type": "text", "id": "meta1_label", "label": "Meta 1 label", "default": "Per level" },
+        { "type": "text", "id": "meta2_value", "label": "Meta 2 value", "default": "Lifetime" },
+        { "type": "text", "id": "meta2_label", "label": "Meta 2 label", "default": "Access" },
+        { "type": "text", "id": "meta3_value", "label": "Meta 3 value", "default": "Instant" },
+        { "type": "text", "id": "meta3_label", "label": "Meta 3 label", "default": "Start today" },
+        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Explore levels" },
+        { "type": "url", "id": "cta_url", "label": "CTA link" },
+        { "type": "select", "id": "cta_style", "label": "CTA style", "default": "solid", "options": [
+          { "value": "solid", "label": "Solid" }, { "value": "", "label": "Outline" }
+        ]}
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "program", "settings": { "tier": "Tier 01 — Entry / Self-serve", "title_line1": "Explosive", "title_line2": "Athlete", "cta_label": "Explore levels", "cta_style": "solid" } },
+      { "type": "program", "settings": { "reverse": true, "tier": "Tier 02 — Rehab / Assessment-gated", "title_line1": "Athletic", "title_line2": "Remodeling", "media_variant": "b", "caption": "FIG.02 — KNEE / RETURN-TO-PLAY CURVE", "tick": "AR//COHORT", "levels": "", "meta1_value": "€399", "meta1_label": "3-month program", "meta2_value": "Cohort", "meta2_label": "Limited spots", "meta3_value": "Assessed", "meta3_label": "Placement first", "cta_label": "See the program", "cta_style": "" } },
+      { "type": "program", "settings": { "tier": "Tier 03 — Premium / Application-only", "title_line1": "Online", "title_line2": "Coaching", "media_variant": "c", "caption": "FIG.03 — INDIVIDUAL BUILD FILE", "tick": "OC//1:1", "levels": "", "meta1_value": "€300+", "meta1_label": "Per month", "meta2_value": "1:1", "meta2_label": "Fully personal", "meta3_value": "By application", "meta3_label": "Capacity-limited", "cta_label": "See the program", "cta_style": "" } }
+    ]
+  },
+  "presets": [{ "name": "Programs showcase" }]
+}
+{% endschema %}

@@ -1,0 +1,51 @@
+<section class="faq wrap"{% if section.settings.padded %} style="padding-bottom:clamp(70px,10vh,130px)"{% endif %}>
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label, no_border: true %}
+  {%- for block in section.blocks -%}
+    <details {{ block.shopify_attributes }}>
+      <summary>{{ block.settings.question }} <span class="pl">+</span></summary>
+      <p>{{ block.settings.answer }}</p>
+    </details>
+  {%- endfor -%}
+</section>
+
+{%- if section.settings.show_schema -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+    {
+      "@type": "Question",
+      "name": {{ block.settings.question | strip_html | json }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "checkbox", "id": "padded", "label": "Extra bottom padding", "default": true },
+    { "type": "text", "id": "number", "label": "Section number", "default": "05" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Questions" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Before you buy" },
+    { "type": "checkbox", "id": "show_schema", "label": "Emit FAQPage JSON-LD", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FAQ" }]
+}
+{% endschema %}

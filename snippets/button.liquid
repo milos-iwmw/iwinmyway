@@ -1,0 +1,24 @@
+{%- comment -%}
+  Renders the .btn component from the design system.
+  Params:
+    label (string, required)
+    url (string, required)
+    style (string) — "solid" | blank
+    size (string) — "lg" | blank
+    arrow (bool) — show the trailing "→" arrow, default true
+    attrs (string) — raw extra attributes, e.g. 'data-foo="1"'
+{%- endcomment -%}
+{%- liquid
+  assign classes = 'btn'
+  if style == 'solid'
+    assign classes = classes | append: ' solid'
+  endif
+  if size == 'lg'
+    assign classes = classes | append: ' lg'
+  endif
+  assign show_arrow = true
+  if arrow == false
+    assign show_arrow = false
+  endif
+-%}
+<a href="{{ url }}" class="{{ classes }}"{% if attrs %} {{ attrs }}{% endif %}>{{ label }}{% if show_arrow %} {% render 'icon-arrow' %}{% endif %}</a>

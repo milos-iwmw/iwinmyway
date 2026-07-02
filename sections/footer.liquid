@@ -1,0 +1,59 @@
+<footer>
+  <div class="fcol fbrand">
+    {%- if section.settings.logo != blank -%}
+      {{ section.settings.logo | image_url: width: 300 | image_tag: alt: shop.name, loading: 'lazy' }}
+    {%- else -%}
+      {{ 'logo-white-full.png' | asset_url | image_tag: alt: shop.name, loading: 'lazy' }}
+    {%- endif -%}
+    <p>{{ section.settings.tagline }}</p>
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'link_column' -%}
+      <div class="fcol" {{ block.shopify_attributes }}>
+        <h4>{{ block.settings.title }}</h4>
+        {%- for link in block.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="fcol">
+    <h4>{{ 'footer.contact' | t }}</h4>
+    {%- if settings.contact_email != blank -%}<a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a>{%- endif -%}
+    {%- if settings.contact_phone != blank -%}<a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a>{%- endif -%}
+    {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}">Instagram ↗</a>{%- endif -%}
+  </div>
+</footer>
+<div class="fbot">
+  <span>© {{ 'now' | date: '%Y' }} {{ shop.name | upcase }}. {{ 'footer.rights' | t }}</span>
+  <span>{{ section.settings.trademark }}</span>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (full)" },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Athlete engineering. Science and experience, turned into a guaranteed system." },
+    { "type": "text", "id": "trademark", "label": "Trademark line", "default": "ATHLETE ENGINEERING METHOD™" }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Column title" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link_column", "settings": { "title": "Programs" } },
+      { "type": "link_column", "settings": { "title": "Company" } }
+    ]
+  }
+}
+{% endschema %}

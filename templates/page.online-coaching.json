@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "crumb2_label": "Programs",
+        "crumb2_url": "/#programs",
+        "crumb_current": "Online Coaching",
+        "tag_label": "Tier 03 — Premium · Application-only",
+        "heading_pre": "Online",
+        "heading_thin": "Coaching",
+        "subtext": "The whole system, built around one athlete: you. Development, rehab, mental training, routines and nutrition — engineered, monitored and adjusted in real time to take your body to the next level and keep it there. Selective by design. Not for everyone.",
+        "show_ctas": true,
+        "cta1_label": "Apply to work 1:1",
+        "cta1_url": "/pages/apply",
+        "cta2_label": "What's included",
+        "cta2_url": "#included"
+      },
+      "blocks": {
+        "m1": { "type": "stat", "settings": { "value": "€300+", "label": "Per month" } },
+        "m2": { "type": "stat", "settings": { "value": "1:1", "label": "Fully personal" } },
+        "m3": { "type": "stat", "settings": { "value": "By application", "label": "Capacity-limited" } },
+        "m4": { "type": "stat", "settings": { "value": "Direct", "label": "Access to the coach" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"]
+    },
+    "who": {
+      "type": "rich-text",
+      "settings": {
+        "number": "01",
+        "title": "Who this is for",
+        "label": "The 1%",
+        "heading": "For the athlete who<br>treats their body<br>like a career.",
+        "lead": "Programs get you far. A coach gets you further. This is total ownership of your physical development — nothing generic, nothing left to chance.",
+        "text": "We engineer around your sport, your schedule, your injury history and your ambitions, then monitor and adjust continuously. It's the most complete — and most demanding — way to work with us. We take on a limited number of athletes so each one gets the attention the result requires."
+      }
+    },
+    "included": {
+      "type": "pillars",
+      "settings": {
+        "anchor_id": "included",
+        "number": "02",
+        "title": "What we engineer",
+        "label": "The whole athlete"
+      }
+    },
+    "steps": {
+      "type": "steps",
+      "settings": {
+        "number": "03",
+        "title": "How it works",
+        "label": "Selective intake"
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "tag": "STEP 01", "title": "Apply", "text": "Tell us who you are, your sport, history and goals. Applications are reviewed individually." } },
+        "s2": { "type": "step", "settings": { "tag": "STEP 02", "title": "Consult", "text": "If it's a fit, we talk — a real conversation about your body, ambitions and whether we're the right team." } },
+        "s3": { "type": "step", "settings": { "tag": "STEP 03", "title": "Assess & build", "text": "Full assessment, then a fully personalized build engineered from your numbers up." } },
+        "s4": { "type": "step", "settings": { "tag": "STEP 04", "title": "Coach & adjust", "text": "Ongoing coaching, monitoring and adjustment. We stay in it until the result is real and repeatable." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "founder": {
+      "type": "founder",
+      "settings": {
+        "media_variant": "c",
+        "media_caption": "FIG — 1:1 BUILD / ATHLETE FILE",
+        "label": "Why it's capped",
+        "quote": "I'd rather engineer ten athletes completely than manage a hundred halfway. The cap isn't scarcity marketing — it's the only way the result stays guaranteed.",
+        "body_text": "",
+        "name": "— FOUNDER NAME",
+        "role": "Founder · Head of Method",
+        "show_cta": true,
+        "cta_label": "About →",
+        "cta_url": "/pages/about"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "padded": true,
+        "number": "04",
+        "title": "Questions",
+        "label": "Before you apply"
+      },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Why do I have to apply?", "answer": "<p>Because capacity is limited and the result depends on fit. The application and consult make sure we can actually deliver for you before either of us commits — and that you get a coach's full attention, not a fraction of it.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "What does “€300+” mean exactly?", "answer": "<p>€300/month is the entry point. Final investment depends on the scope of your build — sport, competition level, rehab needs and the intensity of support required. We agree it transparently at the consult, before you start.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Can you work with my existing team?", "answer": "<p>Yes. For athletes with a club, physio or S&C staff, we integrate rather than override — coordinating so everyone is pulling in the same direction.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "Do you take on injured athletes?", "answer": "<p>Often. Rehab and durability are core pillars. If your case is primarily a structured knee rebuild, Athletic Remodeling may fit better — we'll tell you which door is right at the consult.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "label": "Limited capacity",
+        "heading": "Get engineered 1:1.",
+        "subtext": "Apply. If it's a fit, we build the athlete together.",
+        "cta1_label": "Apply to work 1:1",
+        "cta1_url": "/pages/apply",
+        "cta2_label": "See the results",
+        "cta2_url": "/pages/results"
+      }
+    }
+  },
+  "order": ["hero", "who", "included", "steps", "founder", "faq", "end-cta"]
+}

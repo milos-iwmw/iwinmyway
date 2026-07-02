@@ -1,0 +1,20 @@
+{%- comment -%}
+  Renders a media slot: a real image if `image` is present, otherwise the
+  gridded gradient placeholder from the design system.
+  Params:
+    image (image, optional)
+    variant (string) — "a" | "b" | "c" | "d" (placeholder gradient variant)
+    caption (string, optional) — bottom-left "FIG.xx" style caption
+    tick (string, optional) — top-right mono tag
+    class (string, optional) — extra class on the wrapper (e.g. "ph")
+{%- endcomment -%}
+{%- liquid
+  assign v = variant | default: 'a'
+-%}
+<div class="{{ class | default: 'ph' }} {{ v }} grid">
+  {%- if image != blank -%}
+    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'real', alt: image.alt | default: caption }}
+  {%- endif -%}
+  {%- if caption -%}<div class="cap">{{ caption }}</div>{%- endif -%}
+  {%- if tick -%}<div class="tick">{{ tick }}</div>{%- endif -%}
+</div>

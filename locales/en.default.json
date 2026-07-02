@@ -1,0 +1,49 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "home": "Home",
+    "no_products": "No products yet — check back soon."
+  },
+  "header": {
+    "programs": "Programs",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "footer": {
+    "contact": "Contact",
+    "rights": "ALL RIGHTS RESERVED."
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continue": "Continue",
+    "subtotal": "Subtotal",
+    "update": "Update",
+    "checkout": "Checkout"
+  },
+  "apply": {
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "age": "Age",
+    "sport": "Sport / position",
+    "experience": "Training experience",
+    "exp_beginner": "Beginner (<1 yr)",
+    "exp_intermediate": "Intermediate (1–3 yrs)",
+    "exp_advanced": "Advanced (3+ yrs)",
+    "exp_pro": "Professional",
+    "level": "Current level",
+    "level_youth": "Youth / junior",
+    "level_hs": "High school",
+    "level_college": "College",
+    "level_semipro": "Semi-pro",
+    "level_pro": "Professional",
+    "notes": "Anything we should know? (goals, history, timeline)",
+    "notes_placeholder": "Tell us what you're chasing and where you're starting from..."
+  }
+}

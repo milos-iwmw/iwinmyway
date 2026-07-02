@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}{% unless page_title contains shop.name %} &mdash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% render 'meta-social' %}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {{ settings.font_heading | font_face: font_display: 'swap' }}
+  {{ settings.font_heading.bold | font_face: font_display: 'swap' }}
+  {{ settings.font_mono | font_face: font_display: 'swap' }}
+  {{ settings.font_mono.bold | font_face: font_display: 'swap' }}
+
+  <style>
+    :root{
+      --bg:{{ settings.color_bg | default: '#08090A' }};
+      --bg-2:{{ settings.color_bg_2 | default: '#0E1012' }};
+      --panel:{{ settings.color_panel | default: '#121417' }};
+      --ink:{{ settings.color_ink | default: '#F4F5F6' }};
+      --ink-2:{{ settings.color_ink_2 | default: '#9A9EA4' }};
+      --ink-3:{{ settings.color_ink_3 | default: '#63676D' }};
+      --grot:{{ settings.font_heading.family }}, sans-serif;
+      --mono:{{ settings.font_mono.family }}, monospace;
+    }
+  </style>
+
+  {{ content_for_header }}
+
+  {%- if settings.gtm_id != blank -%}
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ settings.gtm_id }}');
+  </script>
+  {%- endif -%}
+
+  {%- if template.name == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      "email": {{ settings.contact_email | json }},
+      "telephone": {{ settings.contact_phone | json }},
+      "sameAs": [{{ settings.social_instagram | json }}]
+    }
+  </script>
+  {%- endif -%}
+</head>
+<body class="template-{{ template.name }}">
+  {%- if settings.gtm_id != blank -%}
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ settings.gtm_id }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  {%- endif -%}
+
+  <a class="visually-hidden" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
+
+  {% section 'header' %}
+
+  <main id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

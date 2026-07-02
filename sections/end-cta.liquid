@@ -1,0 +1,25 @@
+<section class="endcta wrap">
+  <span class="lbl" style="display:block;margin-bottom:30px">{{ section.settings.label }}</span>
+  <h2>{{ section.settings.heading }}</h2>
+  <p class="sub">{{ section.settings.subtext }}</p>
+  <div class="row">
+    {% render 'button', label: section.settings.cta1_label, url: section.settings.cta1_url, style: 'solid', size: 'lg' %}
+    {% render 'button', label: section.settings.cta2_label, url: section.settings.cta2_url, size: 'lg', arrow: false %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "End CTA",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Your move" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Build the athlete." },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Start with the entry program, or apply to be engineered 1:1." },
+    { "type": "text", "id": "cta1_label", "label": "Button 1 label", "default": "Start Explosive Athlete" },
+    { "type": "url", "id": "cta1_url", "label": "Button 1 link" },
+    { "type": "text", "id": "cta2_label", "label": "Button 2 label", "default": "Apply for 1:1 coaching" },
+    { "type": "url", "id": "cta2_url", "label": "Button 2 link" }
+  ],
+  "presets": [{ "name": "End CTA" }]
+}
+{% endschema %}

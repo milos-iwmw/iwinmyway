@@ -1,0 +1,46 @@
+<section id="{{ section.settings.anchor_id }}" class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="pillars">
+    {%- for block in section.blocks -%}
+      <div class="pcl rv" {{ block.shopify_attributes }}>
+        <div class="pn">{{ block.settings.tag }}</div>
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pillars",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID (optional)" },
+    { "type": "text", "id": "number", "label": "Section number", "default": "02" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "What we engineer" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "The whole athlete" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "pillar", "settings": { "tag": "01", "title": "Athletic Development", "text": "Strength, power, speed and explosiveness programmed to your sport and periodized around your season." } },
+      { "type": "pillar", "settings": { "tag": "02", "title": "Rehab & Durability", "text": "Injury history addressed, weak links reinforced, resilience built so you stay available and extend your career." } },
+      { "type": "pillar", "settings": { "tag": "03", "title": "Mental Training", "text": "Focus, pressure and competition psychology — the layer most programs ignore and elite athletes never do." } },
+      { "type": "pillar", "settings": { "tag": "04", "title": "Routines & Recovery", "text": "Sleep, warm-ups, in-season maintenance and daily habits structured so the training actually holds." } },
+      { "type": "pillar", "settings": { "tag": "05", "title": "Nutrition", "text": "Fueling and body-composition guidance matched to your training load and performance goals." } },
+      { "type": "pillar", "settings": { "tag": "06", "title": "Direct Coaching", "text": "Ongoing communication, video review and real-time adjustment — the coach in your corner, not a PDF." } }
+    ]
+  },
+  "presets": [{ "name": "Pillars" }]
+}
+{% endschema %}

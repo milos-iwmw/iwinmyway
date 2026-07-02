@@ -1,0 +1,31 @@
+<div class="split">
+  {%- for block in section.blocks -%}
+    <div class="col rv" {{ block.shopify_attributes }}>
+      <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.text }}</p>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Split columns",
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "column", "settings": { "title": "The Science", "text": "Every choice traces to a physiological reason — force-velocity profiling, tissue capacity, progressive overload, load management. We don't chase novelty. We apply what the evidence supports, and we measure whether it worked on you specifically." } },
+      { "type": "column", "settings": { "title": "The Experience", "text": "Six years and hundreds of athletes — from juniors to pros — teach you what a textbook can't: how real bodies respond, where programs break, what actually gets an athlete back on the court. Science sets the direction; experience sets the dose." } }
+    ]
+  },
+  "presets": [{ "name": "Split columns" }]
+}
+{% endschema %}

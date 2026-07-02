@@ -1,0 +1,45 @@
+<section class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="incl">
+    {%- for block in section.blocks -%}
+      <div class="icell rv" {{ block.shopify_attributes }}>
+        <div class="in">{{ block.settings.tag }}</div>
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Program includes",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "03" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "What's inside every level" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "The deliverables" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "tag": "01", "title": "The full program", "text": "Week-by-week training blocks with sets, reps, tempo and progression — structured, not a random exercise dump." } },
+      { "type": "item", "settings": { "tag": "02", "title": "Video library", "text": "Every movement demonstrated and coached, so technique is never left to guesswork." } },
+      { "type": "item", "settings": { "tag": "03", "title": "Testing protocol", "text": "Baseline and re-test instructions so you can measure your own vertical and force gains." } },
+      { "type": "item", "settings": { "tag": "04", "title": "Supporting materials", "text": "Warm-ups, mobility and recovery guidance — the 80% checklist that unlocks the guarantee." } },
+      { "type": "item", "settings": { "tag": "05", "title": "Lifetime updates", "text": "Buy once. Every future revision of your level lands in your account at no extra cost." } },
+      { "type": "item", "settings": { "tag": "06", "title": "Upgrade path", "text": "Outgrow your level and step up — credit toward the next tier as you progress through the system." } }
+    ]
+  },
+  "presets": [{ "name": "Program includes" }]
+}
+{% endschema %}

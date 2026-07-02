@@ -1,0 +1,67 @@
+<section class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="athletes">
+    {%- for block in section.blocks -%}
+      <div class="acard rv" {{ block.shopify_attributes }}>
+        <div class="am">
+          {% render 'media-placeholder', image: block.settings.image, variant: block.settings.media_variant, class: 'ph' %}
+        </div>
+        <div class="ab">
+          <div>
+            <div class="anm">{{ block.settings.name }}</div>
+            <div class="aro">{{ block.settings.role }}</div>
+          </div>
+          <div class="aq">{{ block.settings.quote }}</div>
+          <div class="ares">
+            <div><div class="v">{{ block.settings.result1_value }}<span style="font-size:.5em;color:var(--ink-2)">{{ block.settings.result1_unit }}</span></div><div class="k">{{ block.settings.result1_label }}</div></div>
+            <div><div class="v">{{ block.settings.result2_value }}</div><div class="k">{{ block.settings.result2_label }}</div></div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.footnote != blank -%}
+    <p class="muted" style="margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)">{{ section.settings.footnote }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Athlete results",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "02" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "The athletes" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Real names, real numbers" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "athlete",
+      "name": "Athlete",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "select", "id": "media_variant", "label": "Placeholder gradient", "default": "a", "options": [
+          { "value": "a", "label": "A" }, { "value": "b", "label": "B" }, { "value": "c", "label": "C" }, { "value": "d", "label": "D" }
+        ]},
+        { "type": "text", "id": "name", "label": "Name", "default": "Athlete Name" },
+        { "type": "text", "id": "role", "label": "Role", "default": "Sport · Program" },
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "result1_value", "label": "Result 1 value", "default": "+14" },
+        { "type": "text", "id": "result1_unit", "label": "Result 1 unit", "default": "cm" },
+        { "type": "text", "id": "result1_label", "label": "Result 1 label", "default": "Vertical" },
+        { "type": "text", "id": "result2_value", "label": "Result 2 value", "default": "1:1" },
+        { "type": "text", "id": "result2_label", "label": "Result 2 label", "default": "Coaching" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "athlete", "settings": { "name": "Aleksa Radanov", "role": "Pro Basketball · VTB League", "quote": "The approach and attention to every detail is why I chose IWMW — strength, speed, endurance and recovery, all in one system, with the coach beside me on the court and off it.", "result1_value": "+14", "result1_unit": "cm", "result1_label": "Vertical", "result2_value": "1:1", "result2_label": "Coaching" } },
+      { "type": "athlete", "settings": { "media_variant": "b", "name": "Athlete Name", "role": "Pro Guard · Return-to-play", "quote": "Placeholder — post-op knee rebuild through Athletic Remodeling. Back on court ahead of schedule and stronger than pre-injury baseline.", "result1_value": "11", "result1_unit": "wks", "result1_label": "To return", "result2_value": "Track A", "result2_label": "Post-op" } },
+      { "type": "athlete", "settings": { "media_variant": "c", "name": "Athlete Name", "role": "College Forward · Explosive Athlete", "quote": "Placeholder — ran the EA U19 block into a full season. Held acceleration gains across the whole competitive calendar without breakdown.", "result1_value": "-0.09", "result1_unit": "s", "result1_label": "10m sprint", "result2_value": "U19", "result2_label": "Level" } },
+      { "type": "athlete", "settings": { "media_variant": "d", "name": "Athlete Name", "role": "Volleyball · Online Coaching", "quote": "Placeholder — full 1:1 build across development, durability and nutrition. Career-best block numbers and a season without a missed match.", "result1_value": "+9", "result1_unit": "cm", "result1_label": "Block reach", "result2_value": "0", "result2_label": "Games missed" } }
+    ]
+  },
+  "presets": [{ "name": "Athlete results" }]
+}
+{% endschema %}

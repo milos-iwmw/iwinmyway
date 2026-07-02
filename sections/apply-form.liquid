@@ -1,0 +1,274 @@
+{%- comment -%}
+  Apply / lead-capture form.
+  Destination #1 (guaranteed, no JS required): Shopify's native `contact` form,
+  which emails the store's customer notification address — set that to
+  info@iwinmyway.com in Settings > Notifications so it lands there.
+  Destination #2 (primary CRM): Klaviyo. On submit, before the native form
+  navigates away, we fire keepalive fetch() calls to the Klaviyo Client API
+  (public company ID only — no secret key in the theme) to create/update the
+  profile and log an "Application Submitted" event carrying program + tier.
+  Configure settings.klaviyo_public_key and settings.klaviyo_list_id in
+  Theme settings > Lead capture (Klaviyo) for this to activate.
+{%- endcomment -%}
+<div class="applywrap" id="applyform">
+  <div class="side">
+    <div class="sticky">
+      <span class="lbl">{{ section.settings.side_label }}</span>
+      <h2>{{ section.settings.side_heading }}</h2>
+      <p>{{ section.settings.side_text }}</p>
+      <div class="routes">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'route' -%}
+          <div class="route" {{ block.shopify_attributes }}>
+            <span class="rt">{{ block.settings.title }}</span>
+            <span class="rp">{{ block.settings.price }}</span>
+          </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="formside">
+    {%- form 'contact', id: 'appForm' -%}
+    {%- if form.posted_successfully? -%}
+      <span class="step-lbl">{{ section.settings.step_label }}</span>
+      <div class="tick" style="width:64px;height:64px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:26px">✓</div>
+      <div class="h2big" style="font-size:clamp(28px,4vw,46px)">{{ section.settings.success_heading }}</div>
+      <p class="muted" style="margin-top:20px;max-width:48ch;font-size:16px;line-height:1.6">{{ section.settings.success_text }}</p>
+      <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
+        {% render 'button', label: section.settings.success_cta1_label, url: section.settings.success_cta1_url, size: 'lg' %}
+        {% render 'button', label: section.settings.success_cta2_label, url: section.settings.success_cta2_url, size: 'lg', arrow: false %}
+      </div>
+    {%- else -%}
+      <span class="step-lbl">{{ section.settings.step_label }}</span>
+
+        {%- if form.errors -%}
+          <p class="muted" style="color:#e5484d;margin-bottom:20px">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+
+        <input type="hidden" name="contact[body]" id="appFormBody">
+        <input type="hidden" name="contact[Program interest]" id="appFormGoal" value="explosive">
+
+        <div class="fieldset">
+          <span class="qlbl">01 — {{ section.settings.q1_label }}</span>
+          <div class="chips">
+            <label><input type="radio" name="contact[Goal]" data-goal-input value="explosive" checked> {{ section.settings.q1_opt1 }}</label>
+            <label><input type="radio" name="contact[Goal]" data-goal-input value="rehab"> {{ section.settings.q1_opt2 }}</label>
+            <label><input type="radio" name="contact[Goal]" data-goal-input value="coaching"> {{ section.settings.q1_opt3 }}</label>
+            <label><input type="radio" name="contact[Goal]" data-goal-input value="unsure"> {{ section.settings.q1_opt4 }}</label>
+          </div>
+        </div>
+
+        <div class="form">
+          <div class="field"><label>{{ 'apply.first_name' | t }}</label><input type="text" name="contact[First name]" placeholder="Marko" required></div>
+          <div class="field"><label>{{ 'apply.last_name' | t }}</label><input type="text" name="contact[Last name]" placeholder="Petrović" required></div>
+          <div class="field"><label>{{ 'apply.email' | t }}</label><input type="email" name="contact[email]" placeholder="you@email.com" required></div>
+          <div class="field"><label>{{ 'apply.age' | t }}</label><input type="number" name="contact[Age]" placeholder="17" min="8" max="80"></div>
+          <div class="field full"><label>{{ 'apply.sport' | t }}</label><input type="text" name="contact[Sport / position]" placeholder="Basketball — guard"></div>
+          <div class="field">
+            <label>{{ 'apply.experience' | t }}</label>
+            <select name="contact[Training experience]">
+              <option>{{ 'apply.exp_beginner' | t }}</option>
+              <option>{{ 'apply.exp_intermediate' | t }}</option>
+              <option>{{ 'apply.exp_advanced' | t }}</option>
+              <option>{{ 'apply.exp_pro' | t }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>{{ 'apply.level' | t }}</label>
+            <select name="contact[Current level]">
+              <option>{{ 'apply.level_youth' | t }}</option>
+              <option>{{ 'apply.level_hs' | t }}</option>
+              <option>{{ 'apply.level_college' | t }}</option>
+              <option>{{ 'apply.level_semipro' | t }}</option>
+              <option>{{ 'apply.level_pro' | t }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fieldset" style="margin-top:8px">
+          <span class="qlbl">02 — {{ section.settings.q2_label }}</span>
+          <div class="chips">
+            <label><input type="radio" name="contact[Injury status]" value="no" checked> {{ section.settings.q2_opt1 }}</label>
+            <label><input type="radio" name="contact[Injury status]" value="knee"> {{ section.settings.q2_opt2 }}</label>
+            <label><input type="radio" name="contact[Injury status]" value="postop"> {{ section.settings.q2_opt3 }}</label>
+            <label><input type="radio" name="contact[Injury status]" value="other"> {{ section.settings.q2_opt4 }}</label>
+          </div>
+        </div>
+
+        <div class="field full" style="margin-bottom:20px">
+          <label>{{ 'apply.notes' | t }}</label>
+          <textarea name="contact[Notes]" placeholder="{{ 'apply.notes_placeholder' | t }}"></textarea>
+        </div>
+
+        <div class="field full" style="margin-bottom:32px">
+          <label style="display:flex;align-items:flex-start;gap:10px;text-transform:none;font-family:var(--grot);font-size:13px;color:var(--ink-2);letter-spacing:0">
+            <input type="checkbox" name="contact[Marketing consent]" value="yes" style="width:auto;margin-top:3px">
+            {{ section.settings.consent_label }}
+          </label>
+        </div>
+
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <button type="submit" class="btn solid lg">{{ section.settings.submit_label }} <span class="ar">→</span></button>
+          <span class="muted" style="font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)">{{ section.settings.submit_note }}</span>
+        </div>
+    {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var form = document.getElementById('appForm');
+    if (!form) return;
+
+    var KLAVIYO_KEY = {{ settings.klaviyo_public_key | json }};
+    var KLAVIYO_LIST_ID = {{ settings.klaviyo_list_id | json }};
+
+    form.querySelectorAll('[data-goal-input]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        document.getElementById('appFormGoal').value = input.value;
+      });
+    });
+
+    form.addEventListener('submit', function () {
+      var data = new FormData(form);
+      var summary = [];
+      data.forEach(function (value, key) {
+        if (key === 'contact[body]' || key === 'form_type' || key === 'utf8') return;
+        var label = key.replace('contact[', '').replace(']', '');
+        if (value) summary.push(label + ': ' + value);
+      });
+      var bodyField = document.getElementById('appFormBody');
+      if (bodyField) bodyField.value = summary.join('\n');
+
+      if (!KLAVIYO_KEY) return; // Klaviyo not configured yet — native email still sends.
+
+      var email = data.get('contact[email]');
+      var firstName = data.get('contact[First name]');
+      var lastName = data.get('contact[Last name]');
+      var goal = data.get('contact[Goal]');
+      var injury = data.get('contact[Injury status]');
+      var consent = data.get('contact[Marketing consent]') === 'yes';
+      if (!email) return;
+
+      var headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'revision': '2024-10-15'
+      };
+
+      // 1) Create/update the profile.
+      fetch('https://a.klaviyo.com/client/profiles/?company_id=' + KLAVIYO_KEY, {
+        method: 'POST',
+        keepalive: true,
+        headers: headers,
+        body: JSON.stringify({
+          data: {
+            type: 'profile',
+            attributes: {
+              email: email,
+              first_name: firstName,
+              last_name: lastName,
+              properties: { program_interest: goal, injury_status: injury, source: 'apply_form' }
+            }
+          }
+        })
+      }).catch(function () {});
+
+      // 2) Add to the marketing list only if consent was given.
+      if (consent && KLAVIYO_LIST_ID) {
+        fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_KEY, {
+          method: 'POST',
+          keepalive: true,
+          headers: headers,
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
+                      subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } }
+                    }
+                  }
+                }
+              },
+              relationships: { list: { data: { type: 'list', id: KLAVIYO_LIST_ID } } }
+            }
+          })
+        }).catch(function () {});
+      }
+
+      // 3) Log the application as a trackable event with program + tier.
+      fetch('https://a.klaviyo.com/client/events/?company_id=' + KLAVIYO_KEY, {
+        method: 'POST',
+        keepalive: true,
+        headers: headers,
+        body: JSON.stringify({
+          data: {
+            type: 'event',
+            attributes: {
+              properties: { program: goal, injury_status: injury },
+              metric: { data: { type: 'metric', attributes: { name: 'Application Submitted' } } },
+              profile: { data: { type: 'profile', attributes: { email: email } } }
+            }
+          }
+        })
+      }).catch(function () {});
+      // Native form submit continues normally — Shopify still emails the backup copy.
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Apply form",
+  "settings": [
+    { "type": "text", "id": "side_label", "label": "Side label", "default": "The three doors" },
+    { "type": "text", "id": "side_heading", "label": "Side heading", "default": "Not sure which one is yours?" },
+    { "type": "textarea", "id": "side_text", "label": "Side text", "default": "Answer a few questions. If you're self-serve ready, we'll send you straight to your level. If you need assessment — rehab or 1:1 — we'll set it up. No wrong entry." },
+    { "type": "text", "id": "step_label", "label": "Step label", "default": "Application · takes ~2 minutes" },
+    { "type": "text", "id": "q1_label", "label": "Question 1", "default": "What's your primary goal?" },
+    { "type": "text", "id": "q1_opt1", "label": "Q1 option 1", "default": "Add vertical / explosiveness" },
+    { "type": "text", "id": "q1_opt2", "label": "Q1 option 2", "default": "Rehab a knee injury" },
+    { "type": "text", "id": "q1_opt3", "label": "Q1 option 3", "default": "Full 1:1 coaching" },
+    { "type": "text", "id": "q1_opt4", "label": "Q1 option 4", "default": "Not sure yet" },
+    { "type": "text", "id": "q2_label", "label": "Question 2", "default": "Injured right now?" },
+    { "type": "text", "id": "q2_opt1", "label": "Q2 option 1", "default": "No, healthy" },
+    { "type": "text", "id": "q2_opt2", "label": "Q2 option 2", "default": "Knee injury" },
+    { "type": "text", "id": "q2_opt3", "label": "Q2 option 3", "default": "Post-op / recovering" },
+    { "type": "text", "id": "q2_opt4", "label": "Q2 option 4", "default": "Other" },
+    { "type": "textarea", "id": "consent_label", "label": "Consent checkbox label", "default": "Keep me posted by email about programs and offers (Klaviyo marketing list). You can unsubscribe anytime." },
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Submit application" },
+    { "type": "text", "id": "submit_note", "label": "Submit note", "default": "We reply within 48h · no spam" },
+    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Application received." },
+    { "type": "textarea", "id": "success_text", "label": "Success text", "default": "We've got it. Check your inbox — we'll be in touch within 48 hours to point you to the right door in the system." },
+    { "type": "text", "id": "success_cta1_label", "label": "Success button 1 label", "default": "Read the method while you wait" },
+    { "type": "url", "id": "success_cta1_url", "label": "Success button 1 link" },
+    { "type": "text", "id": "success_cta2_label", "label": "Success button 2 label", "default": "See the results" },
+    { "type": "url", "id": "success_cta2_url", "label": "Success button 2 link" }
+  ],
+  "blocks": [
+    {
+      "type": "route",
+      "name": "Route",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "price", "label": "Price / note" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "route", "settings": { "title": "Explosive Athlete", "price": "€50–75 · instant" } },
+      { "type": "route", "settings": { "title": "Athletic Remodeling", "price": "€399 · assessed" } },
+      { "type": "route", "settings": { "title": "Online Coaching", "price": "€300+/mo · apply" } }
+    ]
+  },
+  "presets": [{ "name": "Apply form" }]
+}
+{% endschema %}

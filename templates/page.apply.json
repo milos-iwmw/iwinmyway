@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "tight_bottom": true,
+        "crumb_current": "Start / Apply",
+        "heading_pre": "Find your",
+        "heading_thin": "door.",
+        "subtext": "One system, three ways in. Tell us where you are and what you want — we'll route you to the right program and, where needed, book your assessment."
+      }
+    },
+    "form": {
+      "type": "apply-form",
+      "settings": {
+        "success_cta1_url": "/pages/method",
+        "success_cta2_url": "/pages/results"
+      }
+    }
+  },
+  "order": ["hero", "form"]
+}

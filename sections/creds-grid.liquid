@@ -1,0 +1,47 @@
+<section class="wrap pad">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="creds">
+    {%- for block in section.blocks -%}
+      <div class="ccell rv" {{ block.shopify_attributes }}>
+        <div class="cn">{{ block.settings.tag }}</div>
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.footnote != blank -%}
+    <p class="muted" style="margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)">{{ section.settings.footnote }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Credentials grid",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "01" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "What I stand on" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Credentials & grounding" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "cred",
+      "name": "Credential",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "cred", "settings": { "tag": "01", "title": "Qualifications", "text": "Placeholder — coaching & rehabilitation certifications and education to be listed here." } },
+      { "type": "cred", "settings": { "tag": "02", "title": "Experience", "text": "6+ years, 300+ athletes across basketball, volleyball and field sports." } },
+      { "type": "cred", "settings": { "tag": "03", "title": "Specialisation", "text": "Explosiveness, vertical development and knee rehabilitation / return-to-play." } },
+      { "type": "cred", "settings": { "tag": "04", "title": "Philosophy", "text": "Science sets the direction; experience sets the dose; adherence delivers the result." } }
+    ]
+  },
+  "presets": [{ "name": "Credentials grid" }]
+}
+{% endschema %}

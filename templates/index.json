@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "hero": {
+      "type": "home-hero",
+      "settings": {
+        "top_left": "EST. 2019 — BELGRADE / WORLDWIDE",
+        "top_right": "ATHLETE ENGINEERING METHOD™",
+        "eyebrow": "Science + Experience → Guaranteed Result",
+        "heading_pre": "We don't",
+        "heading_thin": "motivate",
+        "heading_post": "athletes.",
+        "heading_line2": "We engineer them.",
+        "subtext": "A principle-based system for building explosive, durable athletes — and rebuilding the injured ones. Assessed, not guessed. Backed by a result guarantee.",
+        "cta1_label": "Explore Programs",
+        "cta1_url": "#programs",
+        "cta2_label": "The Method",
+        "cta2_url": "/pages/method",
+        "scroll_label": "Scroll"
+      }
+    },
+    "proof": {
+      "type": "proof-bar"
+    },
+    "method": {
+      "type": "method-principles",
+      "settings": {
+        "anchor_id": "method",
+        "cta_url": "/pages/method"
+      }
+    },
+    "programs": {
+      "type": "programs-showcase"
+    },
+    "founder": {
+      "type": "founder",
+      "settings": {
+        "cta_url": "/pages/about"
+      }
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "label": "04 / The Guarantee"
+      }
+    },
+    "results": {
+      "type": "results-grid",
+      "settings": {
+        "number": "05",
+        "title": "Results",
+        "label": "Numbers, not adjectives",
+        "layout": "cards",
+        "show_cta": true,
+        "cta_label": "See all results",
+        "cta_url": "/pages/results"
+      }
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "cta1_url": "/products/explosive-athlete",
+        "cta2_url": "/pages/apply"
+      }
+    }
+  },
+  "order": ["hero", "proof", "method", "programs", "founder", "guarantee", "results", "end-cta"]
+}

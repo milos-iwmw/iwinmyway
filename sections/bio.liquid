@@ -1,0 +1,43 @@
+<div class="bio">
+  <div class="media">
+    {% render 'media-placeholder', image: section.settings.image, variant: section.settings.media_variant, caption: section.settings.media_caption %}
+  </div>
+  <div class="bbody">
+    <span class="lbl">{{ section.settings.label }}</span>
+    <h2>{{ section.settings.name }}</h2>
+    <p class="lead">{{ section.settings.lead }}</p>
+    {%- for block in section.blocks -%}
+      <p {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+    {%- endfor -%}
+    <div class="fsig">
+      <span class="nm">{{ section.settings.sig_name }}</span>
+      <span class="ro">{{ section.settings.sig_role }}</span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bio",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Portrait image" },
+    { "type": "select", "id": "media_variant", "label": "Placeholder gradient", "default": "c", "options": [
+      { "value": "a", "label": "A" }, { "value": "b", "label": "B" }, { "value": "c", "label": "C" }, { "value": "d", "label": "D" }
+    ]},
+    { "type": "text", "id": "media_caption", "label": "Media caption", "default": "PORTRAIT — FOUNDER / HEAD OF METHOD" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Founder · Head of Method" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Founder Name" },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph" },
+    { "type": "text", "id": "sig_name", "label": "Signature name", "default": "— FOUNDER NAME" },
+    { "type": "text", "id": "sig_role", "label": "Signature role", "default": "Founder · Head of Method" }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [{ "type": "textarea", "id": "text", "label": "Text" }]
+    }
+  ],
+  "presets": [{ "name": "Bio" }]
+}
+{% endschema %}

@@ -1,0 +1,34 @@
+<div class="proof">
+  {%- for block in section.blocks -%}
+    <div class="cell rv" {{ block.shopify_attributes }}>
+      <div class="n">{{ block.settings.value }}<sup>{{ block.settings.unit }}</sup></div>
+      <div class="k">{{ block.settings.label }}</div>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Proof bar",
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "300" },
+        { "type": "text", "id": "unit", "label": "Unit / suffix", "default": "+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Athletes engineered" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "stat", "settings": { "value": "+11", "unit": "cm", "label": "Avg vertical gain" } },
+      { "type": "stat", "settings": { "value": "300", "unit": "+", "label": "Athletes engineered" } },
+      { "type": "stat", "settings": { "value": "94", "unit": "%", "label": "Return-to-play rate" } },
+      { "type": "stat", "settings": { "value": "6", "unit": "yrs", "label": "Building the system" } }
+    ]
+  },
+  "presets": [{ "name": "Proof bar" }]
+}
+{% endschema %}

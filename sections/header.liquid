@@ -1,0 +1,99 @@
+{%- liquid
+  assign apply_url = section.settings.apply_page.url | default: '/pages/apply'
+-%}
+<nav id="nav">
+  <a class="brand" href="{{ routes.root_url }}">
+    {%- if section.settings.logo != blank -%}
+      {{ section.settings.logo | image_url: width: 80 | image_tag: alt: shop.name, loading: 'eager' }}
+    {%- else -%}
+      {{ 'logo-white-mark.png' | asset_url | image_tag: alt: shop.name, loading: 'eager' }}
+    {%- endif -%}
+    <b>{{ shop.name }}</b>
+  </a>
+
+  <div class="nlinks">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}"{% if link.active %} class="active"{% endif %}>{{ link.title }}</a>
+      {%- if forloop.index == 1 -%}
+      <div class="ndrop">
+        <span>{{ 'header.programs' | t }} ▾</span>
+        <div class="menu">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'program_link' -%}
+              <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+                <span class="t">{{ block.settings.title }}</span>
+                <span class="d">{{ block.settings.description }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="nav-right">
+    {%- if localization.available_languages.size > 1 -%}
+    <div class="lang">
+      {%- for language in localization.available_languages -%}
+        {%- form 'localization', id: nil, class: nil -%}
+          <input type="hidden" name="locale_code" value="{{ language.iso_code }}">
+          <button type="submit" class="{% if language.iso_code == localization.language.iso_code %}on{% endif %}">{{ language.endonym_name | slice: 0, 2 | upcase }}</button>
+        {%- endform -%}
+        {%- unless forloop.last -%}<span>/</span>{%- endunless -%}
+      {%- endfor -%}
+    </div>
+    {%- else -%}
+    <div class="lang">
+      <a href="{{ apply_url }}" class="on" style="pointer-events:none">EN</a><span>/</span><a href="{{ apply_url }}">SR</a>
+    </div>
+    {%- endif -%}
+    {% render 'button', label: section.settings.cta_label, url: apply_url, style: 'solid' %}
+    <button class="burger" aria-label="{{ 'header.menu' | t }}">≡</button>
+  </div>
+</nav>
+
+<div class="mmenu">
+  <button class="x" aria-label="{{ 'header.close' | t }}">✕</button>
+  {%- for link in section.settings.menu.links -%}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- if forloop.index == 1 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'program_link' -%}
+          <a href="{{ block.settings.url }}">{{ block.settings.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <a href="{{ apply_url }}">{{ section.settings.cta_label }} →</a>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (mark)" },
+    { "type": "link_list", "id": "menu", "label": "Main menu", "info": "Main-menu handle used for nav links (Method / Results / About). Programs dropdown is built from the blocks below." },
+    { "type": "url", "id": "apply_page", "label": "Apply / Start Training link" },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "Start Training" }
+  ],
+  "blocks": [
+    {
+      "type": "program_link",
+      "name": "Program link",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Entry · €50–75 · self-serve" },
+        { "type": "url", "id": "url", "label": "URL" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "program_link", "settings": { "title": "Explosive Athlete", "description": "Entry · €50–75 · self-serve" } },
+      { "type": "program_link", "settings": { "title": "Athletic Remodeling", "description": "Knee rehab · €399 · cohort" } },
+      { "type": "program_link", "settings": { "title": "Online Coaching", "description": "Premium 1:1 · €300+/mo" } }
+    ]
+  }
+}
+{% endschema %}

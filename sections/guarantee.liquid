@@ -1,0 +1,33 @@
+<section class="guarantee">
+  <div class="gbg"></div>
+  <div class="inner">
+    <span class="lbl" style="display:block;margin-bottom:26px">{{ section.settings.label }}</span>
+    <div class="big">{{ section.settings.line1 }}<br>{{ section.settings.line2 }} <em>{{ section.settings.line2_em }}</em></div>
+    <p>{{ section.settings.text }}</p>
+    {%- if section.settings.show_buttons -%}
+    <div class="row">
+      {% render 'button', label: section.settings.cta1_label, url: section.settings.cta1_url, style: 'solid', size: 'lg' %}
+      {% render 'button', label: section.settings.cta2_label, url: section.settings.cta2_url, size: 'lg', arrow: false %}
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Guarantee",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "04 / The Guarantee" },
+    { "type": "text", "id": "line1", "label": "Big line 1", "default": "Do 80%." },
+    { "type": "text", "id": "line2", "label": "Big line 2", "default": "Get the result —" },
+    { "type": "text", "id": "line2_em", "label": "Big line 2 — emphasis part", "default": "or your money back." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The system is proven. The only variable is adherence. Complete at least 80% of your program and supporting materials and don't get the result — we refund you. That's how confident we are in the engineering." },
+    { "type": "checkbox", "id": "show_buttons", "label": "Show buttons" },
+    { "type": "text", "id": "cta1_label", "label": "Button 1 label", "default": "See the programs" },
+    { "type": "url", "id": "cta1_url", "label": "Button 1 link" },
+    { "type": "text", "id": "cta2_label", "label": "Button 2 label", "default": "Apply for coaching" },
+    { "type": "url", "id": "cta2_url", "label": "Button 2 link" }
+  ],
+  "presets": [{ "name": "Guarantee" }]
+}
+{% endschema %}

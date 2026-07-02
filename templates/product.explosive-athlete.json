@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "crumb2_label": "Programs",
+        "crumb2_url": "/#programs",
+        "crumb_current": "Explosive Athlete",
+        "tag_label": "Tier 01 — Entry · Self-serve",
+        "heading_pre": "Explosive",
+        "heading_thin": "Athlete",
+        "subtext": "Add vertical. Move faster. A structured, level-based explosiveness program built on the Athlete Engineering Method — for players who want more off the floor. One payment, lifetime access.",
+        "show_ctas": true,
+        "cta1_label": "Choose your level",
+        "cta1_url": "#levels",
+        "cta2_label": "The Method",
+        "cta2_url": "/pages/method"
+      },
+      "blocks": {
+        "m1": { "type": "stat", "settings": { "value": "€50–75", "label": "Per level" } },
+        "m2": { "type": "stat", "settings": { "value": "Lifetime", "label": "Access, no subscription" } },
+        "m3": { "type": "stat", "settings": { "value": "Instant", "label": "Start today" } },
+        "m4": { "type": "stat", "settings": { "value": "Guaranteed", "label": "80% adherence" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"]
+    },
+    "who": {
+      "type": "rich-text",
+      "settings": {
+        "number": "01",
+        "title": "Who it's for",
+        "label": "The on-ramp",
+        "heading": "Built for the athlete<br>who wants to jump<br>out of the gym.",
+        "text": "This is the accessible entry to the system — the same engineering principles our pros run, packaged as a self-guided program you start the moment you buy. Follow the level, do the work, hit the numbers. Pick the level that matches your age and training experience; move up as you build."
+      }
+    },
+    "levels": {
+      "type": "price-levels",
+      "settings": {
+        "footnote_url": "/pages/apply"
+      }
+    },
+    "includes": {
+      "type": "program-includes"
+    },
+    "steps": {
+      "type": "steps",
+      "settings": {
+        "number": "04",
+        "title": "How it works",
+        "label": "From buy to build"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "number": "05",
+        "title": "Questions",
+        "label": "Before you buy"
+      },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Do I need a gym?", "answer": "<p>Junior and U17 can be run largely with bodyweight and minimal equipment. From U19 up you'll need access to a barbell and basic strength equipment to load the strength blocks properly.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "How long is each level?", "answer": "<p>Each level is a multi-block program spanning roughly 8–12 weeks of structured work, plus retesting. Lifetime access means you can repeat blocks and re-run the program as you progress.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "How does the guarantee apply here?", "answer": "<p>Complete at least 80% of your level's sessions and supporting materials, follow the testing protocol, and if you don't see the measured result, we refund you. Adherence is the only variable.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "Which level should I choose?", "answer": "<p>Start from your age bracket, then adjust for training experience — a strong 16-year-old may belong in U19, a beginner senior may start at U17. The placement quiz removes the guesswork.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "line1": "Do 80%. Add the inches —",
+        "line2": "",
+        "line2_em": "or your money back.",
+        "text": "Follow your level and supporting materials, hit the testing protocol, and if the vertical isn't there — we refund you."
+      }
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "label": "Start today",
+        "heading": "Jump higher.",
+        "subtext": "One payment. Lifetime access. Instant start.",
+        "cta1_label": "Choose your level",
+        "cta1_url": "#levels",
+        "cta2_label": "Read the method",
+        "cta2_url": "/pages/method"
+      }
+    }
+  },
+  "order": ["hero", "who", "levels", "includes", "steps", "faq", "guarantee", "end-cta"]
+}

@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "crumb_current": "About",
+        "crumb_current_url": "/pages/about",
+        "heading_pre": "The person<br>behind the",
+        "heading_thin": "method.",
+        "subtext": "A method is only as credible as the person who stands behind it. I put my name on every result the system produces — here's why that means something."
+      }
+    },
+    "bio": {
+      "type": "bio",
+      "settings": {
+        "lead": "I started I Win My Way because I was tired of watching athletes get generic programs, vague rehab and empty motivation — and pay for it with their progress and their careers."
+      },
+      "blocks": {
+        "p1": { "type": "paragraph", "settings": { "text": "Over six years I've worked with hundreds of athletes, from juniors chasing their first dunk to professionals protecting a career. Every one of them taught me the same lesson: the body responds to a system, not a slogan. So I built one — the Athlete Engineering Method — and I've spent every season since refining it against real results." } },
+        "p2": { "type": "paragraph", "settings": { "text": "My obsession is detail. The right assessment, the right load, the right progression, verified by testing. When you control the process that tightly, the outcome stops being a gamble. That's why I can put a guarantee on it — and why I'm in the gym, on the track and in your messages, not hiding behind a PDF." } }
+      },
+      "block_order": ["p1", "p2"]
+    },
+    "creds": {
+      "type": "creds-grid",
+      "settings": {
+        "footnote": "* Replace placeholders with your real qualifications, certifications and story."
+      }
+    },
+    "mission": {
+      "type": "founder",
+      "settings": {
+        "border_bottom": true,
+        "media_variant": "a",
+        "media_caption": "THE MISSION",
+        "label": "Where this is going",
+        "quote": "The goal isn't to be a trainer. It's to build the place elite athletes come to get engineered — and to make that same system available to the kid with a hoop in the driveway.",
+        "body_text": "",
+        "name": "",
+        "role": "",
+        "show_cta": false
+      }
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "label": "Work with me",
+        "heading": "Let's build.",
+        "subtext": "Start with a program, or apply to be engineered 1:1.",
+        "cta1_label": "Explore Programs",
+        "cta1_url": "/#programs",
+        "cta2_label": "Apply for 1:1 coaching",
+        "cta2_url": "/pages/apply"
+      }
+    }
+  },
+  "order": ["hero", "bio", "creds", "mission", "end-cta"]
+}

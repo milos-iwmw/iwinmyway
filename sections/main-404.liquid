@@ -1,0 +1,19 @@
+<div class="notfound">
+  <span class="lbl" style="display:block;margin-bottom:26px">{{ section.settings.label }}</span>
+  <h1>{{ section.settings.heading }}</h1>
+  <p class="sub" style="max-width:52ch;margin-inline:auto;margin-top:24px">{{ section.settings.text }}</p>
+  <div style="margin-top:40px">{% render 'button', label: section.settings.cta_label, url: routes.root_url, style: 'solid', size: 'lg' %}</div>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "404 / Lost the plot" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Not found." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "That page doesn't exist — but the method still does." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Back to home" }
+  ],
+  "presets": [{ "name": "404" }]
+}
+{% endschema %}

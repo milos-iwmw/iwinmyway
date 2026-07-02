@@ -1,0 +1,46 @@
+<section class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="tracks">
+    {%- for block in section.blocks -%}
+      <div class="tcell rv" {{ block.shopify_attributes }}>
+        <div class="tn">{{ block.settings.tag }}</div>
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.footnote != blank -%}
+    <p class="muted" style="margin-top:22px;font-size:14px;line-height:1.6;max-width:70ch">{{ section.settings.footnote }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Tracks",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "03" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Tracks" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Placement decided at assessment" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "track",
+      "name": "Track",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "TRACK A" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "track", "settings": { "tag": "TRACK A", "title": "Post-Op", "text": "Rebuilding after surgery — ACL and similar reconstructions. Graded loading from cleared-to-load through return-to-performance." } },
+      { "type": "track", "settings": { "tag": "TRACK B", "title": "Non-Surgical", "text": "Tendinopathy, patellofemoral pain and chronic knee issues managed through progressive capacity work, not rest." } },
+      { "type": "track", "settings": { "tag": "TRACK C", "title": "Return-to-Sport", "text": "Cleared but not confident. Bridge the gap between medical discharge and full competitive demand." } }
+    ]
+  },
+  "presets": [{ "name": "Tracks" }]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<section id="{{ section.settings.anchor_id }}" class="{% if section.settings.show_intro %}method {% endif %}wrap">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+
+  {%- if section.settings.show_intro -%}
+  <div class="intro">
+    <div class="h2big rv">{{ section.settings.intro_heading }}</div>
+    <p class="rv">{{ section.settings.intro_text }}</p>
+  </div>
+  {%- endif -%}
+
+  <div{% unless section.settings.show_intro %} style="padding-top:26px"{% endunless %}>
+    {%- for block in section.blocks -%}
+      <div class="prow rv" {{ block.shopify_attributes }}>
+        <div class="idx">{{ block.settings.index }}</div>
+        <h3>{{ block.settings.title }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.show_cta -%}
+  <div style="padding-top:40px">
+    {% render 'button', label: section.settings.cta_label, url: section.settings.cta_url, size: 'lg' %}
+  </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Method principles",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "method" },
+    { "type": "text", "id": "number", "label": "Section number", "default": "01" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "The Athlete Engineering Method™" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Principles > Programs" },
+    { "type": "checkbox", "id": "show_intro", "label": "Show intro grid", "default": true },
+    { "type": "text", "id": "intro_heading", "label": "Intro heading", "default": "Five principles. Zero guesswork." },
+    { "type": "textarea", "id": "intro_text", "label": "Intro text", "default": "Every athlete we build runs through the same engineered system. It doesn't change with trends — it changes with your data. This is what makes the result repeatable, and what makes the guarantee possible." },
+    { "type": "checkbox", "id": "show_cta", "label": "Show bottom CTA", "default": true },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read the full method" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        { "type": "text", "id": "index", "label": "Index", "default": "P.01" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "principle", "settings": { "index": "P.01", "title": "Assess, don't guess", "text": "No program starts without a full physical assessment. We measure force, range, asymmetry and history — then engineer backwards from the result you want." } },
+      { "type": "principle", "settings": { "index": "P.02", "title": "Force before flight", "text": "Explosiveness is built on strength. We develop the capacity to produce force before we ever chase the jump — so the gains hold under fatigue and load." } },
+      { "type": "principle", "settings": { "index": "P.03", "title": "Rehab is training", "text": "The injured athlete isn't a patient — they're an athlete mid-build. We rebuild the joint by training it, not resting it, on a graded return-to-performance curve." } },
+      { "type": "principle", "settings": { "index": "P.04", "title": "Durability over highlights", "text": "Anyone can peak once. We engineer bodies that stay at the level and extend the career — resilience is the product, performance is the proof." } },
+      { "type": "principle", "settings": { "index": "P.05", "title": "Adherence is the variable", "text": "The science works. The only variable is you. Hit 80% of the program and the supporting materials — and the result is on us." } }
+    ]
+  },
+  "presets": [{ "name": "Method principles" }]
+}
+{% endschema %}

@@ -1,0 +1,18 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_bg": "#08090A",
+      "color_bg_2": "#0E1012",
+      "color_panel": "#121417",
+      "color_ink": "#F4F5F6",
+      "color_ink_2": "#9A9EA4",
+      "color_ink_3": "#63676D",
+      "font_heading": "jost_n4",
+      "font_mono": "space_mono_n4",
+      "contact_email": "info@iwinmyway.com",
+      "contact_phone": "+381 64 993 0681",
+      "social_instagram": "https://www.instagram.com/iwmwtraining/"
+    }
+  }
+}

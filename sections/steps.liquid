@@ -1,0 +1,44 @@
+<section id="{{ section.settings.anchor_id }}" class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="steps" style="margin-top:40px">
+    {%- for block in section.blocks -%}
+      <div class="step rv" {{ block.shopify_attributes }}>
+        <div class="sn">{{ block.settings.tag }}</div>
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Steps",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID (optional)" },
+    { "type": "text", "id": "number", "label": "Section number", "default": "04" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "How it works" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "From buy to build" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "STEP 01" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "step", "settings": { "tag": "STEP 01", "title": "Pick your level", "text": "Choose by age and training age, or take the quick placement." } },
+      { "type": "step", "settings": { "tag": "STEP 02", "title": "Get instant access", "text": "One payment. The full program and video library unlock immediately." } },
+      { "type": "step", "settings": { "tag": "STEP 03", "title": "Test, then train", "text": "Log your baseline, then run the blocks as written — hit 80%." } },
+      { "type": "step", "settings": { "tag": "STEP 04", "title": "Re-test the result", "text": "Measure the change. Bank the number. Step up a level." } }
+    ]
+  },
+  "presets": [{ "name": "Steps" }]
+}
+{% endschema %}

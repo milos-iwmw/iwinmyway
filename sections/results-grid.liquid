@@ -1,0 +1,88 @@
+{%- liquid
+  if section.settings.padded
+    assign section_class = 'wrap pad'
+    assign section_style = ''
+  else
+    assign section_class = 'wrap'
+    assign section_style = 'padding-bottom:clamp(70px,10vh,130px)'
+  endif
+-%}
+<section class="{{ section_class }}"{% if section_style != '' %} style="{{ section_style }}"{% endif %}>
+  {%- if section.settings.show_head -%}
+    {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  {%- endif -%}
+
+  {%- if section.settings.layout == 'bigstat' -%}
+  <div class="bigstat" style="margin-top:50px">
+    {%- for block in section.blocks -%}
+      <div class="bs rv" {{ block.shopify_attributes }}>
+        <div class="bn">{{ block.settings.value }}<sup>{{ block.settings.unit }}</sup></div>
+        <div class="bk">{{ block.settings.label }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- else -%}
+  <div class="rgrid" style="margin-top:50px">
+    {%- for block in section.blocks -%}
+      <div class="rcard rv" {{ block.shopify_attributes }}>
+        <div class="rk">{{ block.settings.label }}</div>
+        <div class="rn">{{ block.settings.value }}<sup>{{ block.settings.unit }}</sup></div>
+        <div class="rq">{{ block.settings.quote }}</div>
+        <div class="rby">{{ block.settings.byline }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+
+  {%- if section.settings.footnote != blank -%}
+    <p class="muted" style="margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)">{{ section.settings.footnote }}</p>
+  {%- endif -%}
+
+  {%- if section.settings.show_cta -%}
+  <div style="padding-top:40px">
+    {% render 'button', label: section.settings.cta_label, url: section.settings.cta_url, size: 'lg' %}
+  </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Results grid",
+  "settings": [
+    { "type": "checkbox", "id": "padded", "label": "Extra top/bottom padding", "default": true },
+    { "type": "checkbox", "id": "show_head", "label": "Show section header", "default": true },
+    { "type": "text", "id": "number", "label": "Section number", "default": "05" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Results" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Numbers, not adjectives" },
+    { "type": "select", "id": "layout", "label": "Layout", "default": "cards", "options": [
+      { "value": "cards", "label": "Quote cards (rgrid)" },
+      { "value": "bigstat", "label": "Big numbers (bigstat)" }
+    ]},
+    { "type": "textarea", "id": "footnote", "label": "Footnote (optional)" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show bottom CTA" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "See all results" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Result",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "+14" },
+        { "type": "text", "id": "unit", "label": "Unit / suffix", "default": "cm" },
+        { "type": "text", "id": "label", "label": "Label (short, cards layout)", "default": "Vertical Jump" },
+        { "type": "textarea", "id": "quote", "label": "Quote (cards layout only)" },
+        { "type": "text", "id": "byline", "label": "Byline (cards layout only)", "default": "— ATHLETE NAME" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "result", "settings": { "value": "+14", "unit": "cm", "label": "Vertical Jump", "quote": "The approach and attention to every detail is why I chose IWMW — strength, speed, endurance, recovery, all in one system.", "byline": "— ALEKSA RADANOV · VTB LEAGUE" } },
+      { "type": "result", "settings": { "value": "11", "unit": "wks", "label": "Return to Play", "quote": "Post-injury knee remodeling — back on court ahead of schedule and stronger than pre-injury baseline.", "byline": "— PRO GUARD · PLACEHOLDER" } },
+      { "type": "result", "settings": { "value": "-0.09", "unit": "s", "label": "Sprint 10m", "quote": "Measured, repeatable acceleration gains held through a full competitive season without breakdown.", "byline": "— COLLEGE FORWARD · PLACEHOLDER" } }
+    ]
+  },
+  "presets": [{ "name": "Results grid" }]
+}
+{% endschema %}

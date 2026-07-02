@@ -1,0 +1,80 @@
+{%- comment -%}
+  Athletic Remodeling cohort panel. Reads price + remaining spots straight
+  from the product's variant (inventory-tracked in Admin, default 15,
+  editable 10–20). This is apply-first: the CTA always routes to the
+  Apply page, never straight to checkout — placement happens before purchase.
+{%- endcomment -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+<section class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="cohort">
+    <div class="cl rv">
+      <div class="lbl" style="margin-bottom:14px">{{ section.settings.included_label }}</div>
+      <ul>
+        {%- for block in section.blocks -%}
+          <li><span>→</span> {{ block.settings.text }}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="cr rv">
+      <div class="lbl">{{ section.settings.fee_label }}</div>
+      <div class="pp">
+        {%- if variant -%}{{ variant.price | money }}{%- else -%}{{ section.settings.fallback_price }}{%- endif -%}
+        <small>{{ section.settings.fee_period }}</small>
+      </div>
+      {%- if variant and variant.inventory_management != blank -%}
+        <p class="muted" style="font-size:13px;line-height:1.55">
+          {%- if variant.available -%}
+            {{ variant.inventory_quantity }} {{ section.settings.spots_label }}
+          {%- else -%}
+            {{ section.settings.soldout_label }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+      <p class="muted" style="font-size:13px;line-height:1.55">{{ section.settings.note }}</p>
+      {%- if variant == blank or variant.available -%}
+        {% render 'button', label: section.settings.cta_label, url: section.settings.cta_url, style: 'solid', size: 'lg' %}
+      {%- else -%}
+        <span class="btn solid lg" aria-disabled="true" style="margin-top:8px">{{ section.settings.soldout_label }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cohort",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "04" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "The cohort" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "Limited spots · next intake" },
+    { "type": "text", "id": "included_label", "label": "Included label", "default": "Included" },
+    { "type": "text", "id": "fee_label", "label": "Fee label", "default": "Program fee" },
+    { "type": "text", "id": "fallback_price", "label": "Fallback price (if no variant)", "default": "€399" },
+    { "type": "text", "id": "fee_period", "label": "Fee period", "default": "/ 3 months" },
+    { "type": "text", "id": "spots_label", "label": "Spots-left label", "default": "spots left in this cohort" },
+    { "type": "text", "id": "soldout_label", "label": "Sold-out label", "default": "Cohort full — join the waitlist" },
+    { "type": "textarea", "id": "note", "label": "Note", "default": "Spots are capped per cohort so every athlete gets real coaching attention. Apply to secure assessment for the next intake." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Apply for assessment" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "included",
+      "name": "Included item",
+      "settings": [{ "type": "text", "id": "text", "label": "Text" }]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "included", "settings": { "text": "Full assessment & placement" } },
+      { "type": "included", "settings": { "text": "3-month graded program" } },
+      { "type": "included", "settings": { "text": "Coach-led cohort guidance" } },
+      { "type": "included", "settings": { "text": "Weekly check-ins" } },
+      { "type": "included", "settings": { "text": "Movement & testing library" } },
+      { "type": "included", "settings": { "text": "Return-to-sport re-test" } }
+    ]
+  },
+  "presets": [{ "name": "Cohort" }]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+{
+  "general": {
+    "skip_to_content": "Idi na sadržaj",
+    "home": "Početna",
+    "no_products": "Trenutno nema proizvoda — svratite uskoro."
+  },
+  "header": {
+    "programs": "Programi",
+    "menu": "Meni",
+    "close": "Zatvori"
+  },
+  "footer": {
+    "contact": "Kontakt",
+    "rights": "SVA PRAVA ZADRŽANA."
+  },
+  "products": {
+    "add_to_cart": "Dodaj u korpu",
+    "sold_out": "Rasprodato",
+    "unavailable": "Nedostupno"
+  },
+  "cart": {
+    "title": "Korpa",
+    "empty": "Vaša korpa je prazna.",
+    "continue": "Nastavi",
+    "subtotal": "Ukupno",
+    "update": "Ažuriraj",
+    "checkout": "Plaćanje"
+  },
+  "apply": {
+    "first_name": "Ime",
+    "last_name": "Prezime",
+    "email": "Email",
+    "age": "Godine",
+    "sport": "Sport / pozicija",
+    "experience": "Trenažno iskustvo",
+    "exp_beginner": "Početnik (<1 god)",
+    "exp_intermediate": "Srednji nivo (1–3 god)",
+    "exp_advanced": "Napredni (3+ god)",
+    "exp_pro": "Profesionalac",
+    "level": "Trenutni nivo",
+    "level_youth": "Omladinski / juniorski",
+    "level_hs": "Srednja škola",
+    "level_college": "Fakultet",
+    "level_semipro": "Polu-profesionalac",
+    "level_pro": "Profesionalac",
+    "notes": "Da li treba još nešto da znamo? (ciljevi, istorija, rok)",
+    "notes_placeholder": "Recite nam šta želite da postignete i odakle krećete..."
+  }
+}

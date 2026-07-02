@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "crumb_current": "Method",
+        "crumb_current_url": "/pages/method",
+        "heading_pre": "The Athlete<br>Engineering",
+        "heading_thin": "Method",
+        "subtext": "The system behind every result. Five principles that turn training and rehab from opinion and guesswork into something measurable, repeatable — and guaranteed."
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "5", "label": "Principles" } },
+        "s2": { "type": "stat", "settings": { "value": "3", "label": "Build phases" } },
+        "s3": { "type": "stat", "settings": { "value": "Science + Experience", "label": "Inputs" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "thesis": {
+      "type": "method-principles",
+      "settings": {
+        "anchor_id": "thesis",
+        "number": "01",
+        "title": "Why a method at all",
+        "label": "The thesis",
+        "show_intro": true,
+        "intro_heading": "Most training is opinion. Ours is engineering.",
+        "intro_text": "The industry runs on motivation, trends and generic programs. It works by accident and fails without explanation. We rejected that.",
+        "show_cta": false
+      },
+      "blocks": {}
+    },
+    "principles": {
+      "type": "method-principles",
+      "settings": {
+        "anchor_id": "principles",
+        "number": "02",
+        "title": "The Five Principles",
+        "label": "Non-negotiable",
+        "show_intro": false,
+        "show_cta": false
+      }
+    },
+    "phases": {
+      "type": "build-phases"
+    },
+    "split": {
+      "type": "split-cols"
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "label": "The Guarantee",
+        "show_buttons": true,
+        "cta1_label": "See the programs",
+        "cta1_url": "/products/explosive-athlete",
+        "cta2_label": "Apply for coaching",
+        "cta2_url": "/pages/apply"
+      }
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "label": "Put the method to work",
+        "heading": "Get engineered.",
+        "subtext": "Start with the entry program, or apply to be built 1:1.",
+        "cta1_label": "Start Explosive Athlete",
+        "cta1_url": "/products/explosive-athlete",
+        "cta2_label": "Apply for 1:1 coaching",
+        "cta2_url": "/pages/apply"
+      }
+    }
+  },
+  "order": ["hero", "thesis", "principles", "phases", "split", "guarantee", "end-cta"]
+}

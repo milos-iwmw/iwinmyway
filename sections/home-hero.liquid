@@ -1,0 +1,48 @@
+<header class="hero">
+  <div class="hero-ph">
+    {%- if section.settings.bg_image != blank -%}
+      {{ section.settings.bg_image | image_url: width: 2400 | image_tag: loading: 'eager', class: 'real', style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55' }}
+    {%- endif -%}
+  </div>
+  <div class="gridlines"></div>
+  <div class="grain" style="z-index:1"></div>
+  <div class="hero-top">
+    <span>{{ section.settings.top_left }}</span>
+    <span>{{ section.settings.top_right }}</span>
+  </div>
+  <div class="wrap hero-content">
+    <div class="hero-tag rv"><span class="dot"></span><span class="lbl">{{ section.settings.eyebrow }}</span></div>
+    <h1 class="rv">{{ section.settings.heading_pre }} <span class="thin">{{ section.settings.heading_thin }}</span> {{ section.settings.heading_post }}<br>{{ section.settings.heading_line2 }}</h1>
+    <div class="hero-sub">
+      <p class="rv">{{ section.settings.subtext }}</p>
+      <div class="hero-cta rv">
+        {% render 'button', label: section.settings.cta1_label, url: section.settings.cta1_url, style: 'solid', size: 'lg' %}
+        {% render 'button', label: section.settings.cta2_label, url: section.settings.cta2_url, size: 'lg', arrow: false %}
+      </div>
+    </div>
+  </div>
+  <div class="scrollhint">{{ section.settings.scroll_label }} ↓</div>
+</header>
+
+{% schema %}
+{
+  "name": "Home hero",
+  "settings": [
+    { "type": "image_picker", "id": "bg_image", "label": "Background image", "info": "Falls back to the gridded gradient placeholder when empty" },
+    { "type": "text", "id": "top_left", "label": "Top-left mono label", "default": "EST. 2019 — BELGRADE / WORLDWIDE" },
+    { "type": "text", "id": "top_right", "label": "Top-right mono label", "default": "ATHLETE ENGINEERING METHOD™" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Science + Experience → Guaranteed Result" },
+    { "type": "text", "id": "heading_pre", "label": "Heading — before thin word", "default": "We don't" },
+    { "type": "text", "id": "heading_thin", "label": "Heading — thin word", "default": "motivate" },
+    { "type": "text", "id": "heading_post", "label": "Heading — after thin word", "default": "athletes." },
+    { "type": "text", "id": "heading_line2", "label": "Heading — second line", "default": "We engineer them." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "A principle-based system for building explosive, durable athletes — and rebuilding the injured ones. Assessed, not guessed. Backed by a result guarantee." },
+    { "type": "text", "id": "cta1_label", "label": "Primary button label", "default": "Explore Programs" },
+    { "type": "url", "id": "cta1_url", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "The Method" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary button link" },
+    { "type": "text", "id": "scroll_label", "label": "Scroll hint label", "default": "Scroll" }
+  ],
+  "presets": [{ "name": "Home hero" }]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+<section class="founder"{% if section.settings.border_bottom %} style="border-bottom:1px solid var(--line)"{% endif %}>
+  <div class="media">
+    {% render 'media-placeholder', image: section.settings.image, variant: section.settings.media_variant, caption: section.settings.media_caption %}
+  </div>
+  <div class="fbody">
+    <span class="lbl">{{ section.settings.label }}</span>
+    <blockquote><span class="q">&ldquo;</span>{{ section.settings.quote }}<span class="q">&rdquo;</span></blockquote>
+    {%- if section.settings.body_text != blank -%}
+      <p class="muted" style="font-size:16px;line-height:1.6;max-width:46ch">{{ section.settings.body_text }}</p>
+    {%- endif -%}
+    <div class="fsig">
+      <span class="nm">{{ section.settings.name }}</span>
+      <span class="ro">{{ section.settings.role }}</span>
+      {%- if section.settings.show_cta -%}
+        {% render 'button', label: section.settings.cta_label, url: section.settings.cta_url, arrow: false, attrs: 'style="margin-left:auto"' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder",
+  "settings": [
+    { "type": "checkbox", "id": "border_bottom", "label": "Add bottom border" },
+    { "type": "image_picker", "id": "image", "label": "Portrait image" },
+    { "type": "select", "id": "media_variant", "label": "Placeholder gradient", "default": "c", "options": [
+      { "value": "a", "label": "A" }, { "value": "b", "label": "B" }, { "value": "c", "label": "C" }, { "value": "d", "label": "D" }
+    ]},
+    { "type": "text", "id": "media_caption", "label": "Media caption", "default": "PORTRAIT — FOUNDER / HEAD OF METHOD" },
+    { "type": "text", "id": "label", "label": "Label", "default": "03 / The person behind the method" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "I don't sell motivation. I engineer results — and I put my name on every one of them." },
+    { "type": "textarea", "id": "body_text", "label": "Body text (optional)", "default": "Six years, hundreds of athletes, one obsession: turning training and rehab from guesswork into a repeatable system. The Athlete Engineering Method is mine — and I stand behind every result it produces." },
+    { "type": "text", "id": "name", "label": "Name", "default": "— FOUNDER NAME" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Founder · Head of Method" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA link", "default": true },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "About →" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Founder" }]
+}
+{% endschema %}

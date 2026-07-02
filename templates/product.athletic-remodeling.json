@@ -1,0 +1,95 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "crumb2_label": "Programs",
+        "crumb2_url": "/#programs",
+        "crumb_current": "Athletic Remodeling",
+        "tag_label": "Tier 02 — Rehab · Assessment-gated",
+        "heading_pre": "Athletic",
+        "heading_thin": "Remodeling",
+        "subtext": "A cohort-based knee rehabilitation program. Whatever the injury, we assess it, place you on the right track, and guide you back — not just cleared, but stronger than before. Limited spots, structured over three months.",
+        "show_ctas": true,
+        "cta1_label": "Apply for assessment",
+        "cta1_url": "/pages/apply",
+        "cta2_label": "How it works",
+        "cta2_url": "#process"
+      },
+      "blocks": {
+        "m1": { "type": "stat", "settings": { "value": "€399", "label": "Full 3-month program" } },
+        "m2": { "type": "stat", "settings": { "value": "Cohort", "label": "Limited spots" } },
+        "m3": { "type": "stat", "settings": { "value": "Assessed", "label": "Placement first" } },
+        "m4": { "type": "stat", "settings": { "value": "Guided", "label": "Coach-led" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"]
+    },
+    "problem": {
+      "type": "rich-text",
+      "settings": {
+        "number": "01",
+        "title": "The problem we fix",
+        "label": "Beyond \"cleared\"",
+        "heading": "Most rehab stops<br>the day you're<br>told you're fine.",
+        "lead": "There's a gap between “medically cleared” and “ready to compete” — and that gap is where re-injury lives. Standard rehab rarely loads the joint like sport does.",
+        "text": "Athletic Remodeling closes it. We treat the injured knee as an athlete mid-build: assessed, loaded on a graded return-to-performance curve, and progressed until it's stronger and more resilient than it was before you got hurt. Principle 03 — rehab is training."
+      }
+    },
+    "process": {
+      "type": "steps",
+      "settings": {
+        "anchor_id": "process",
+        "number": "02",
+        "title": "The process",
+        "label": "Assessment-gated by design"
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "tag": "STEP 01", "title": "Apply", "text": "Tell us about your injury, history and goals. This is a gated program — placement comes first." } },
+        "s2": { "type": "step", "settings": { "tag": "STEP 02", "title": "Assess", "text": "We evaluate your knee, stage and capacity, and determine whether — and where — you fit." } },
+        "s3": { "type": "step", "settings": { "tag": "STEP 03", "title": "Remodel", "text": "Placed in the right track and cohort, you run a coach-led, graded 3-month rebuild." } },
+        "s4": { "type": "step", "settings": { "tag": "STEP 04", "title": "Return", "text": "Re-tested against sport demands and returned stronger — with a plan to stay there." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "tracks": {
+      "type": "tracks",
+      "settings": {
+        "footnote": "Your track isn't self-selected — it's decided at assessment, because the wrong load at the wrong stage is how people get hurt twice. That's the point of the gate."
+      }
+    },
+    "cohort": {
+      "type": "cohort",
+      "settings": {
+        "cta_url": "/pages/apply"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "number": "05",
+        "title": "Questions",
+        "label": "Before you apply"
+      },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Is this a replacement for my doctor or surgeon?", "answer": "<p>No. Athletic Remodeling is a performance-rehabilitation program that works alongside your medical care. We require you to be medically cleared to load, and we coordinate with the stage your clinician has set. We rebuild capacity; we don't diagnose or treat medical conditions.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "What if I'm not accepted?", "answer": "<p>The assessment gate protects you. If you're not ready to load, or your case needs medical management first, we'll tell you honestly and point you in the right direction rather than take your money.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Do I need to be an athlete?", "answer": "<p>You need to be someone who wants their knee to perform, not just stop hurting. Competitive athletes and serious recreational movers both fit — the track and loading are matched to your demands at assessment.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "How does the guarantee apply?", "answer": "<p>Complete at least 80% of your programmed sessions, check-ins and supporting materials and follow the graded progression. If you do the work and don't reach your placement's return-to-performance milestones, we make it right — the standard adherence guarantee applies.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+    "end-cta": {
+      "type": "end-cta",
+      "settings": {
+        "label": "Next intake — limited spots",
+        "heading": "Rebuild the knee.",
+        "subtext": "Assessment first. Placement second. Stronger than before.",
+        "cta1_label": "Apply for assessment",
+        "cta1_url": "/pages/apply",
+        "cta2_label": "Read the method",
+        "cta2_url": "/pages/method"
+      }
+    }
+  },
+  "order": ["hero", "problem", "process", "tracks", "cohort", "faq", "end-cta"]
+}

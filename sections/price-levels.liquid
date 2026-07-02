@@ -1,0 +1,92 @@
+{%- comment -%}
+  Explosive Athlete variant-picker grid. Each block maps to one product
+  variant (matched by option value, e.g. "JR" / "U17" / "U19" / "PRO" / "ELITE").
+  Price is pulled live from the matching Shopify variant — never hardcoded —
+  so editing the price in Admin > Products updates this grid automatically.
+  Each card is its own tiny cart form that adds the variant and redirects
+  straight to checkout (no page-builder / cart app needed).
+{%- endcomment -%}
+<section id="levels" class="wrap" style="padding-bottom:clamp(70px,10vh,130px)">
+  {% render 'section-head', number: section.settings.number, title: section.settings.title, label: section.settings.label %}
+  <div class="pricegrid cols-5" style="margin-top:40px">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign variant = null
+        for v in product.variants
+          if v.option1 == block.settings.level_value
+            assign variant = v
+          endif
+        endfor
+      -%}
+      <div class="pcell rv{% if block.settings.featured %} feat{% endif %}{% if variant and variant.available == false %} soldout{% endif %}" {{ block.shopify_attributes }}>
+        <div class="pl">{{ block.settings.plan_label }}</div>
+        <div class="pt">{{ block.settings.title }}</div>
+        <div class="pp">
+          {%- if variant -%}{{ variant.price | money }}{%- else -%}—{%- endif -%}
+        </div>
+        {%- assign feature_lines = block.settings.features | newline_to_br | split: '<br />' -%}
+        <ul>
+          {%- for line in feature_lines -%}
+            {%- assign clean = line | strip -%}
+            {%- if clean != blank -%}<li>{{ clean }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+        {%- if variant -%}
+          {%- if variant.available -%}
+          <form method="post" action="{{ routes.cart_add_url }}">
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button type="submit" class="btn{% if block.settings.featured %} solid{% endif %}">{{ block.settings.cta_label }} <span class="ar">→</span></button>
+          </form>
+          {%- else -%}
+            <span class="btn" aria-disabled="true">{{ 'products.sold_out' | t }}</span>
+          {%- endif -%}
+        {%- else -%}
+          <span class="btn" aria-disabled="true">{{ 'products.unavailable' | t }}</span>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.footnote != blank -%}
+    <p class="muted" style="margin-top:22px;font-size:13px;font-family:var(--mono);letter-spacing:.04em">{{ section.settings.footnote }} <a href="{{ section.settings.footnote_url }}" style="color:var(--ink);text-decoration:underline">{{ section.settings.footnote_link_label }}</a></p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Price levels",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Section number", "default": "02" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Choose your level" },
+    { "type": "text", "id": "label", "label": "Section tag label", "default": "One payment · lifetime access" },
+    { "type": "text", "id": "footnote", "label": "Footnote text", "default": "Not sure which level?" },
+    { "type": "text", "id": "footnote_link_label", "label": "Footnote link label", "default": "Take the 2-minute placement" },
+    { "type": "url", "id": "footnote_url", "label": "Footnote link" }
+  ],
+  "blocks": [
+    {
+      "type": "level",
+      "name": "Level",
+      "settings": [
+        { "type": "text", "id": "level_value", "label": "Matching variant option value", "info": "Must exactly match the product's variant option value (e.g. JR, U17, U19, PRO, ELITE)." },
+        { "type": "text", "id": "plan_label", "label": "Plan label", "default": "EA · JR" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Junior" },
+        { "type": "textarea", "id": "features", "label": "Features (one per line)" },
+        { "type": "checkbox", "id": "featured", "label": "Featured (highlighted card)" },
+        { "type": "text", "id": "cta_label", "label": "Button label", "default": "Get Junior" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "level", "settings": { "level_value": "JR", "plan_label": "EA · JR", "title": "Junior", "features": "Ages 11–14\nMovement foundations\nLanding & jump mechanics\nBodyweight base", "cta_label": "Get Junior" } },
+      { "type": "level", "settings": { "level_value": "U17", "plan_label": "EA · U17", "title": "Under 17", "features": "Ages 15–16\nStrength introduction\nPlyometric progressions\nFirst vertical block", "cta_label": "Get U17" } },
+      { "type": "level", "settings": { "level_value": "U19", "plan_label": "EA · U19", "title": "Under 19", "features": "Ages 17–18\nLoaded strength work\nRate of force development\nFull vertical system", "featured": true, "cta_label": "Get U19" } },
+      { "type": "level", "settings": { "level_value": "PRO", "plan_label": "EA · PRO", "title": "Pro", "features": "Competitive seniors\nIn-season safe loading\nElastic & reactive focus\nPeaking protocols", "cta_label": "Get Pro" } },
+      { "type": "level", "settings": { "level_value": "ELITE", "plan_label": "EA · ELITE", "title": "Elite", "features": "Advanced athletes\nMax output blocks\nForce-velocity targeting\nFull testing battery", "cta_label": "Get Elite" } }
+    ]
+  },
+  "presets": [{ "name": "Price levels" }]
+}
+{% endschema %}

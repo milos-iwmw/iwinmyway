@@ -1,0 +1,55 @@
+{%- comment -%}
+  Generic fallback product page (for any product that isn't Explosive Athlete
+  or Athletic Remodeling, which use their own dedicated templates).
+{%- endcomment -%}
+<div class="phead" style="padding-bottom:clamp(50px,7vh,80px)">
+  <div class="bg"></div><div class="gl"></div>
+  <div class="inner" style="max-width:900px">
+    <div class="crumb"><a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a><span class="lbl">/</span><a href="{{ product.url }}">{{ product.title }}</a></div>
+    <h1 style="font-size:clamp(34px,6vw,72px)">{{ product.title }}</h1>
+    {%- if product.description != blank -%}<div class="sub">{{ product.description }}</div>{%- endif -%}
+  </div>
+</div>
+
+<section class="wrap pad">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start">
+    <div class="ph a grid" style="position:relative;min-height:420px">
+      {%- if product.featured_media -%}
+        {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'eager', class: 'real' }}
+      {%- endif -%}
+    </div>
+
+    <div>
+      <div class="pp" style="margin-bottom:24px">
+        {%- if product.compare_at_price > product.price -%}
+          <span style="text-decoration:line-through;color:var(--ink-3);margin-right:10px">{{ product.compare_at_price | money }}</span>
+        {%- endif -%}
+        {{ product.price | money }}
+      </div>
+
+      {%- form 'product', product -%}
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="field" style="margin-bottom:18px">
+              <label>{{ option.name }}</label>
+              <select name="options[{{ option.name | escape }}]">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}"{% if value == option.selected_value %} selected{% endif %}>{{ value }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="return_to" value="/checkout">
+
+        {%- if product.selected_or_first_available_variant.available -%}
+          <button type="submit" class="btn solid lg">{{ 'products.add_to_cart' | t }} <span class="ar">→</span></button>
+        {%- else -%}
+          <span class="btn lg" aria-disabled="true">{{ 'products.sold_out' | t }}</span>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>

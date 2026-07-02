@@ -1,0 +1,67 @@
+<div class="phead"{% if section.settings.tight_bottom %} style="padding-bottom:clamp(36px,5vh,60px)"{% endif %}>
+  <div class="bg"></div><div class="gl"></div>
+  <div class="inner">
+    <div class="crumb">
+      <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a><span class="lbl">/</span>
+      {%- if section.settings.crumb2_label != blank -%}
+        <a href="{{ section.settings.crumb2_url | default: '#' }}">{{ section.settings.crumb2_label }}</a><span class="lbl">/</span>
+      {%- endif -%}
+      <a href="{{ section.settings.crumb_current_url | default: '#' }}">{{ section.settings.crumb_current }}</a>
+    </div>
+
+    {%- if section.settings.tag_label != blank -%}
+      <div class="lbl" style="margin-bottom:18px">{{ section.settings.tag_label }}</div>
+    {%- endif -%}
+
+    <h1>{{ section.settings.heading_pre }} <span class="thin">{{ section.settings.heading_thin }}</span></h1>
+    <p class="sub">{{ section.settings.subtext }}</p>
+
+    {%- if section.blocks.size > 0 -%}
+    <div class="meta">
+      {%- for block in section.blocks -%}
+        <div class="m" {{ block.shopify_attributes }}><div class="mv">{{ block.settings.value }}</div><div class="mk">{{ block.settings.label }}</div></div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_ctas -%}
+    <div style="margin-top:38px;display:flex;gap:14px;flex-wrap:wrap">
+      {% render 'button', label: section.settings.cta1_label, url: section.settings.cta1_url, style: 'solid', size: 'lg' %}
+      {% render 'button', label: section.settings.cta2_label, url: section.settings.cta2_url, size: 'lg', arrow: false %}
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page hero",
+  "settings": [
+    { "type": "checkbox", "id": "tight_bottom", "label": "Tighter bottom padding" },
+    { "type": "text", "id": "crumb2_label", "label": "Middle breadcrumb label (optional)" },
+    { "type": "url", "id": "crumb2_url", "label": "Middle breadcrumb link" },
+    { "type": "text", "id": "crumb_current", "label": "Current breadcrumb label" },
+    { "type": "url", "id": "crumb_current_url", "label": "Current breadcrumb link" },
+    { "type": "text", "id": "tag_label", "label": "Tag label above heading (optional)" },
+    { "type": "text", "id": "heading_pre", "label": "Heading" },
+    { "type": "text", "id": "heading_thin", "label": "Heading — thin part" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext" },
+    { "type": "checkbox", "id": "show_ctas", "label": "Show CTA buttons" },
+    { "type": "text", "id": "cta1_label", "label": "Button 1 label" },
+    { "type": "url", "id": "cta1_url", "label": "Button 1 link" },
+    { "type": "text", "id": "cta2_label", "label": "Button 2 label" },
+    { "type": "url", "id": "cta2_url", "label": "Button 2 link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Meta stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value" },
+        { "type": "text", "id": "label", "label": "Label" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Page hero" }]
+}
+{% endschema %}

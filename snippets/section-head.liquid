@@ -1,0 +1,8 @@
+{%- comment -%}
+  Renders the "01 / Title" + label pattern (.sec-head).
+  Params: number (string), title (string), label (string), no_border (bool)
+{%- endcomment -%}
+<div class="sec-head"{% if no_border %} style="border-bottom:none"{% endif %}>
+  <h2>{{ number }} / {{ title }}</h2>
+  <span class="lbl">{{ label }}</span>
+</div>
