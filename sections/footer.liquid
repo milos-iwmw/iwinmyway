@@ -3,7 +3,7 @@
     {%- if section.settings.logo != blank -%}
       {{ section.settings.logo | image_url: width: 300 | image_tag: alt: shop.name, loading: 'lazy' }}
     {%- else -%}
-      {{ 'logo-white-full.png' | asset_url | image_tag: alt: shop.name, loading: 'lazy' }}
+      <img src="{{ 'logo-white-full.png' | asset_url }}" alt="{{ shop.name }}" loading="lazy" width="1080" height="1080">
     {%- endif -%}
     <p>{{ section.settings.tagline }}</p>
   </div>
