@@ -9,7 +9,7 @@
 <section class="wrap pad">
   {%- if cart.item_count == 0 -%}
     <p class="muted" style="font-size:18px">{{ 'cart.empty' | t }}</p>
-    <div style="margin-top:30px">{% render 'button', label: 'cart.continue' | t, url: routes.root_url, style: 'solid', size: 'lg' %}</div>
+    <div style="margin-top:30px">{% render 'button', label: 'cart.continue', url: routes.root_url, style: 'solid', size: 'lg' %}</div>
   {%- else -%}
     {%- form 'cart', cart -%}
       <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:34px">
@@ -39,3 +39,15 @@
     {%- endform -%}
   {%- endif -%}
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'button', label: 'cart.continue' | t, url: routes.root_url, style:
+    'solid', size: 'lg' %}"
+  to: "{% render 'button', label: 'cart.continue', url: routes.root_url, style: 'solid',
+    size: 'lg' %}"
+  position: 564..659
+{% endcomment %}
